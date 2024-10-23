@@ -14,3 +14,10 @@ echo "$($PSQL "SELECT course FROM courses WHERE course < 'D'")"
 
 echo -e "\nFirst name, last name, and GPA of students whose last name begins with an 'R' or after and have a GPA greater than 3.8 or less than 2.0:"
 echo "$($PSQL "SELECT first_name, last_name, gpa FROM students WHERE last_name >= 'R' AND (gpa > 3.8 OR gpa < 2.0)")"
+
+echo -e "\nLast name of students whose last name contains a case insensitive 'sa' or have an 'r' as the second to last letter:"
+echo "$($PSQL "select last_name from students where last_name ILIKE '%sa%' or last_name  LIKE '%r_'")"
+
+echo -e "\nFirst name, last name, and GPA of students who have not selected a major and either their first name begins with 'D' or they have a GPA greater than 3.0:"
+echo "$($PSQL "select first_name, last_name, gpa from students where major_id IS NULL and (first_name LIKE 'D%' or gpa > 3.0)")"
+echo -e "\nCourse name of the first five courses, in reverse alphabetical order, that have an 'e' as the second letter or end with an 's':"
